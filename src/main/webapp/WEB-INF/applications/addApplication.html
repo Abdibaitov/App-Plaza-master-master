@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<style>
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-size: 62.5%;
+  }
+
+  body {
+    height: 100vh;
+    width: 100%;
+    background: #0f2027; /* fallback for old browsers */
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    color: #fff;
+  }
+
+  .form__label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+    transform: translateY(0rem);
+  }
+
+  .form__input {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 90%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+  }
+
+  .form__input:placeholder-shown + .form__label {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: translateY(-4rem);
+    transform: translateY(-4rem);
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  .wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button {
+    min-width: 300px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129, 230, 217, 1) 0%, rgba(79, 209, 197, 1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79, 209, 197, .64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+  }
+
+  button::before {
+    content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0, 255, 203, .64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+  }
+
+  .button:hover, .button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+  }
+
+  button:hover::before, button:focus::before {
+    opacity: 1;
+  }
+
+  button::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+  }
+
+  button:hover::after, button:focus::after {
+    animation: none;
+    display: none;
+  }
+
+  @keyframes ring {
+    0% {
+      width: 30px;
+      height: 30px;
+      opacity: 1;
+    }
+    100% {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
+  }
+
+  .middle {
+    position: absolute;
+    top: 30%;
+    left: 8%;
+    transform: translate(-50%, -50%);
+  }
+
+  .btn {
+    position: relative;
+    display: block;
+    color: #2a9a05;
+    font-size: 14px;
+    font-family: "montserrat";
+    text-decoration: none;
+    margin: 30px 0;
+    border: 2px solid #169393;
+    padding: 14px 60px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 1s all ease;
+  }
+
+  .btn::before {
+    background: #2a9a05;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+  }
+
+  .btn1::before {
+    width: 0%;
+    height: 100%;
+  }
+
+  .btn1:hover::before {
+    width: 100%;
+  }
+
+
+  .btn2::before {
+    width: 100%;
+    height: 0%;
+  }
+
+  .btn2:hover::before {
+    height: 100%;
+  }
+
+  .btn3::before {
+    width: 100%;
+    height: 0%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .btn3:hover::before {
+    height: 380%;
+  }
+
+  .btn4::before {
+    width: 100%;
+    height: 0%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .btn4:hover::before {
+    height: 380%;
+  }
+  select {
+    height: 45px;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 8px 0;
+  }
+
+</style>
+
+<body>
+
+<div style="text-align: center;margin-top: 200px;font-size:30px; ">
+  <form
+        th:object="${application}">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <div class="form__aplication">
+      <input type="text" class="form__input" th:field="*{name}" id="aplicationName" placeholder="application name"
+             required=""/>
+      <label for="aplicationName" class="form__label"> Group Name</label>
+      <br>
+      <br>
+      <input type="text" class="form__input" th:field="*{describsion}" id="describsion" placeholder="application name"
+             required=""/>
+      <label for="aplicationName" class="form__label"> Group Name</label>
+      <br>
+      <br>
+      <input type="text" class="form__input" th:field="*{dateOfFinish}" id="date of finish"
+             placeholder="date of finish" required=""/>
+      <label for="date of finish" class="form__label">Date of Finish</label>
+      <br>
+      <select th:field="*{courseId}">-->
+        <option th:each="course:${courseList}"
+                th:value="${course.id}"
+                th:text="${course.courseName}">
+        </option>
+      </select>
+
+      <div class="wrap">
+        <button class="button">add Group</button>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+        <div class="middle">
+          <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/companies}" class="btn btn1">Company</a>
+          <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/courses}" class="btn btn2">Course</a>
+          <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/groups}" class="btn btn3">Group</a>
+          <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/teachers}" class="btn btn4">Teacher</a>
+          <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/students}" class="btn btn4">Student</a>
+          <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/users}" class="btn btn4">User</a>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+<!--<label>&ndash;&gt;-->
+  <!--      <input type="text" class="input" name="username" th:field="*{email}" placeholder="ENTER EMAIL"/>-->
+  <!--      <div class="line-box">-->
+  <!--        <div class="line"></div>-->
+  <!--      </div>-->
+  <!--    </label>-->
+
+  <!--    <label>-->
+  <!--      <input type="password" class="input" name="password" th:field="*{password}" placeholder="ENTER PASSWORD"/>-->
+  <!--      <div class="line-box">-->
+  <!--        <div class="line"></div>-->
+  <!--      </div>-->
+  <!--    </label>-->

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список Приложений</title>
+</head>
+<style>
+    /* style.css */
+    body {
+        background:url("https://img3.akspic.ru/crops/5/4/4/1/5/151445/151445-zemlya-temnota-astronomiya-vselennaya-kosmos-3840x2160.jpg") ;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .container {
+        width: 80%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4caf50;
+        color: #fff;
+    }
+
+</style>
+<body>
+<form th:action="@{/findAll}"
+      th:method="Get"
+      th:object="application">
+<div class="container">
+
+    <h2>Applications</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>DEVELOPER</th>
+            <th>VERSION</th>
+            <th>GENRE NAME</th>
+            <th>STATUS</th>
+            <th>CREATE DATE</th>
+            <!--            <th>UPDATE</th>-->
+            <th>DELETE</th>
+            <th>ADD APPLICATION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Здесь будет генерироваться список данных -->
+        <tr th:each="appication:${application}">
+            <td th:text="${application.id}"></td>
+            <td th:text="${application.name}"/>
+            <td th:text="${application.age}"/>
+            <td th:text="${application.email}"/>
+            <td th:text="${application.subscribeToTheNewsletter}"/>
+            <td th:text="${application.role}"/>
+            <td th:text="${application.subscriptionStatus}"/>
+            <td th:text="${application.createDate}"/>
+            <td><a th:href="@{/delete/{id}(id=${user.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:green;">delete</button></a></td>
+        </tr>
+
+        </tbody>
+    </table>
+    <!--    <button><a th:href="@{/a}">CREATE APPLICATION</a></button>-->
+
+</div>
+</form>
+</body>
+</html>

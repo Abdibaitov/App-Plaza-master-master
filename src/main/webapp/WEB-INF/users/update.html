@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin:0;
+            padding:0;
+            font-family: sans-serif;
+            background: url(https://proforientator.ru/publications/articles/it_sfera.jpg);            background-size: cover;
+            /*linear-gradient(#141e30, #243b55);*/
+        }
+
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,.5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0,0,0,.6);
+            border-radius: 10px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #718fa3;
+            text-align: center;
+        }
+
+        .login-box .user-box {
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+        .login-box .user-box label {
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+
+        .login-box a:hover {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+            0 0 25px #03e9f4,
+            0 0 50px #03e9f4,
+            0 0 100px #03e9f4;
+        }
+
+        .login-box a span {
+            position: absolute;
+            display: block;
+        }
+
+        .login-box button span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03e9f4);
+            animation: btn-anim1 1s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+            50%,100% {
+                left: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #03e9f4);
+            animation: btn-anim2 1s linear infinite;
+            animation-delay: .25s
+        }
+
+        @keyframes btn-anim2 {
+            0% {
+                top: -100%;
+            }
+            50%,100% {
+                top: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #03e9f4);
+            animation: btn-anim3 1s linear infinite;
+            animation-delay: .5s
+        }
+        @keyframes btn-anim3 {
+            0% {
+                right: -100%;
+            }
+            50%,100% {
+                right: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #03e9f4);
+            animation: btn-anim4 1s linear infinite;
+            animation-delay: .75s
+        }
+
+        @keyframes btn-anim4 {
+            0% {
+                bottom: -100%;
+            }
+            50%,100% {
+                bottom: 100%;
+            }
+        }
+        button {
+            color: #fff;
+            width: 0%;
+            height: 2%;
+        }
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h2>Update</h2>
+    <form class="form2"
+          th:object="${userUpdate}"
+          th:action="@{/save-update/{id}(id=${user.id})}"
+          th:method="post"
+        <div class="user-box">
+
+            <input type="text" id="email" name="username" required="username">
+            <label for="email">Username</label>
+        </div>
+        <div class="user-box">
+
+            <input type="text" id="loginName1" name="email" required="email">
+            <label for="loginName1">Email</label>
+        </div>
+        <div class="user-box">
+            <input type="password" id="loginPassword" name="password" required="password">
+            <label for="loginPassword">Password</label>
+        </div>
+        <label for="appStatus">Subscribe Status: <select id="appStatus" th:field="*{userUpdate.subscriptionStatus}" required>
+            <option value="BASIC">BASIC</option>
+            <option value="PREMIUM">PREMIUM</option>
+        </select></label>
+        <input type="checkbox" checked="checked" name="subscribe" th:field="*{userUpdate.subscribeToTheNewsletter}"> Daily
+        Newsletter
+        <div>
+        </div>
+        <button style="height:0px;width:0px; background:transparent; border:0;"  type="submit" >
+            <a>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Update</a>
+        </button >
+    </form>
+        <a href="/sign-in">Sign in</a>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Registration Form With Html & Css</title>-->
+<!--    <link rel="stylesheet" href="./style.css">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--</head>-->
+<!--<style>body {-->
+<!--    background: #C5E1A5;-->
+<!--}-->
+
+
+<!--form {-->
+<!--    width: 30%;-->
+<!--    margin: 60px auto;-->
+<!--    background: #efefef;-->
+<!--    padding: 60px 120px 80px 120px;-->
+<!--    text-align: center;-->
+<!--    -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);-->
+<!--    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);-->
+<!--}-->
+
+
+<!--label {-->
+<!--    display: block;-->
+<!--    position: relative;-->
+<!--    margin: 40px 0px;-->
+<!--}-->
+
+<!--.label-txt {-->
+<!--    position: absolute;-->
+<!--    top: -1.6em;-->
+<!--    padding: 10px;-->
+<!--    font-family: sans-serif;-->
+<!--    font-size: .8em;-->
+<!--    letter-spacing: 1px;-->
+<!--    color: rgb(120, 120, 120);-->
+<!--    transition: ease .3s;-->
+<!--}-->
+
+
+<!--.input {-->
+<!--    width: 100%;-->
+<!--    padding: 10px;-->
+<!--&lt;!&ndash;    background: transparent;&ndash;&gt;-->
+<!--&lt;!&ndash;    border: none;&ndash;&gt;-->
+<!--&lt;!&ndash;    outline: none;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+
+<!--&lt;!&ndash;.line-box {&ndash;&gt;-->
+<!--&lt;!&ndash;    position: relative;&ndash;&gt;-->
+<!--&lt;!&ndash;    width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;    height: 1px;&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #BCBCBC;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+
+<!--&lt;!&ndash;.line {&ndash;&gt;-->
+<!--&lt;!&ndash;    position: absolute;&ndash;&gt;-->
+<!--&lt;!&ndash;    width: 0%;&ndash;&gt;-->
+<!--&lt;!&ndash;    height: 2px;&ndash;&gt;-->
+<!--&lt;!&ndash;    top: 0px;&ndash;&gt;-->
+<!--&lt;!&ndash;    left: 50%;&ndash;&gt;-->
+<!--&lt;!&ndash;    transform: translateX(-50%);&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #8BC34A;&ndash;&gt;-->
+<!--&lt;!&ndash;    transition: ease .6s;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+
+<!--&lt;!&ndash;.input:focus + .line-box .line {&ndash;&gt;-->
+<!--&lt;!&ndash;    width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+
+<!--&lt;!&ndash;.label-active {&ndash;&gt;-->
+<!--&lt;!&ndash;    top: -3em;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+
+<!--&lt;!&ndash;button {&ndash;&gt;-->
+<!--&lt;!&ndash;    display: inline-block;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding: 12px 24px;&ndash;&gt;-->
+<!--&lt;!&ndash;    background: rgb(220, 220, 220);&ndash;&gt;-->
+<!--&lt;!&ndash;    font-weight: bold;&ndash;&gt;-->
+<!--&lt;!&ndash;    color: rgb(120, 120, 120);&ndash;&gt;-->
+<!--&lt;!&ndash;    border: none;&ndash;&gt;-->
+<!--&lt;!&ndash;    outline: none;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius: 3px;&ndash;&gt;-->
+<!--&lt;!&ndash;    cursor: pointer;&ndash;&gt;-->
+<!--&lt;!&ndash;    transition: ease .3s;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+
+<!--&lt;!&ndash;button:hover {&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #8BC34A;&ndash;&gt;-->
+<!--&lt;!&ndash;    color: #ffffff;&ndash;&gt;-->
+<!--&lt;!&ndash;} </style>&ndash;&gt;-->
+<!--<body>-->
+
+<!--<div>-->
+
+<!--    <form class="form"-->
+<!--          th:action="@{/save-update/{id}(id=${user.id})-->
+<!--          th:object="${user}"-->
+<!--          th:method="post">-->
+
+<!--        <h4 class="text-warning text-center pt-5">Registration Page</h4>-->
+
+<!--        <label>-->
+<!--            <input type="email" class="input" name="email" placeholder="ENTER EMAIL"/>-->
+<!--            <div class="line-box">-->
+<!--                <div class="line"></div>-->
+<!--            </div>-->
+<!--        </label>-->
+<!--        <label>-->
+<!--            <input type="text" class="input" name="age" placeholder="AGE"/>-->
+<!--            <div class="line-box">-->
+<!--                <div class="line"></div>-->
+<!--            </div>-->
+<!--        </label>-->
+
+<!--        <label>-->
+<!--            <input type="text" class="input" name="username" placeholder="ENTER USERNAME"/>-->
+<!--            <div class="line-box">-->
+<!--                <div class="line"></div>-->
+<!--            </div>-->
+<!--        </label>-->
+
+<!--        <label>-->
+<!--            <input type="password" class="input" name="update password" placeholder="ENTER PASSWORD"/>-->
+<!--            <div class="line-box">-->
+<!--                <div class="line"></div>-->
+<!--            </div>-->
+<!--        </label>-->
+<!--        <label for="appStatus">Subscribe Status: <select id="appStatus" th:field="*{subscriptionStatus}" required>-->
+<!--            <option value="BASIC">BASIC</option>-->
+<!--            <option value="PREMIUM">PREMIUM</option>-->
+<!--        </select></label>-->
+<!--        <input type="checkbox" checked = "checked" name = "subscribe" th:field="*{subscribeToTheNewsletter}" Daily Newsletter >-->
+
+<!--        <button type="submit">Update</button>-->
+
+
+
+<!--    </form>-->
+<!--    <a href="/sign-in">Sign in</a>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
